@@ -18,6 +18,7 @@ class Program
         - Cities: Helsinki, Tampere, Lahti, Porvo, Kemi
         - Borders: Norway, Sweden, Russia
          */
+        var countries = new Countries();
         var Finland = new Country("Finland", "Helsinki", 5530719, 27.3);
         Finland.Region = EnumRegion.NorthernEurope;
         List<Languages> languagesList = new List<Languages>();
@@ -50,6 +51,20 @@ class Program
         {
             Console.WriteLine(Finland.cities[i].IsCapital ? Finland.cities[i].CityName : "");   //Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.
         }
+
+        List<Country> countriesList = new List<Country>();
+        countriesList.Add(Finland);
+        countriesList.Add(Sweden);
+        countries.countries = countriesList.ToArray<Country>();
+        for (var i = 0; i < countries.countries.Count(); i++)
+        {
+            Console.WriteLine($"{countries.countries[i].CountryName}: {countries.countries[i].Capital}");   //Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.
+        }
+
+
+
+
+
         //Finland.languages.add();
         // Finland.setCountryLanguages();
         // Finland.setCountryLanguages(Finland.CountryName, "Swedish", false);
@@ -64,62 +79,17 @@ class Program
         //Challenge 2
         /* write your own game */
     }
-    public enum EnumRegion
+    class Countries
     {
-        NorthernEurope,
-        SouthernEurope,
-        EasternEurope,
-        WesternEurope
-    }
-    public enum EnumBorderCountry
-    {
-        None = 0b_0000_0000,
-        Norway = 0b_0000_0001,
-        Sweden = 0b_0000_0010,
-        Russia = 0b_0000_0100,
-        Finland = 0b_0000_1000
-    }
+        public Country[] countries;
+        public Countries(){
 
-    class Country
-    {
-        /* provide your code for challenge 1 here */
-        public readonly string CountryName;
-        public long Population;
-        public EnumRegion Region;
-        public string Capital { get; init; }
-        public double Gdp;
-        public Languages[]? languages;
-        public Cities[]? cities;
-        public EnumBorderCountry borders;
-        // private string? _langugage;
-        // private bool _isDefault;
-        // private string? _cntry;
-
-        //constructor
-        public Country(string country, string capital, long population, double gdp)
-        {
-            if (country == null)
-            {
-                throw new ArgumentException("Country name is a readonly property should be set and cannot be null");
-            }
-            CountryName = country;
-            Capital = capital;
-            Population = population;
-            Gdp = gdp;
         }
-        public static bool HasBorder(Country name) => name.borders > 0 ? true : false;
 
-        public static EnumBorderCountry HasBorder(EnumBorderCountry borderCountry1, EnumBorderCountry borderCountry2) => (borderCountry1 & borderCountry2);
-
-        // public static bool HasBorder(Country name) => name.borders.Length > 0 ? true : false;
-
-        public static bool CheckWealth(Country name)
-        {
-            return true;
-        }
-       
     }
-   
+
+
+
 
     class Room
     {
