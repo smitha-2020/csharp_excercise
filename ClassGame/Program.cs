@@ -20,20 +20,43 @@ class Program
          */
         var Finland = new Country("Finland", "Helsinki", 5530719, 27.3);
         Finland.Region = EnumRegion.NorthernEurope;
-        Country.HasBorder(Finland);
-        Finland.languages[0] = new Languages("Finnish",true);
-        Finland.languages[1] = new Languages("Swedish",false);
-        Finland.languages[2] = new Languages("English",false);
+        var Sweden = new Country("Sweden", "Stockholm", 5530719, 27.3);
+        Sweden.Region = EnumRegion.SouthernEurope;
+        List<Languages> languagesList = new List<Languages>();
+        languagesList.Add(new Languages("Finnish", true));
+        languagesList.Add(new Languages("Swedish", false));
+        languagesList.Add(new Languages("English", false));
+        Finland.languages = languagesList.ToArray<Languages>();
+        // converts List to Array:
+        //Languages[] Finland.Languages = languagesList.ToArray<Languages>();
+        for (var i = 0; i < Finland.languages.Count(); i++)
+        {
+            Console.WriteLine(Finland.languages[i].IsDefault ? Finland.languages[i].Language : "");
+        }
+        Finland.borders = EnumBorderCountry.Norway | EnumBorderCountry.Sweden | EnumBorderCountry.Russia;
+        Sweden.borders = EnumBorderCountry.Norway | EnumBorderCountry.Finland;
+
+        //Console.WriteLine(Country.HasBorder(Finland));
+        //Debug.Assert(Country.HasBorder(Finland) == true);
 
 
-        // foreach(var element in Finland.languages){
-        //   Console.WriteLine(element.IsDefault?element.Language:null);
 
+
+
+        // Finland.cities[0] = new Cities("Helsinki", true, 658864);
+        // Finland.cities[1] = new Cities("Tampere", false, 244315);
+        // Finland.cities[2] = new Cities("Lahti", false, 120093);
+        // for (var i = 0; i < Finland.cities.Length; i++)
+        // {
+        //     Console.WriteLine(Finland.cities[i].IsCapital ? Finland.cities[i].CityName : "");   //Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.
         // }
-        
+
+
+
+
         //Finland.languages.add();
-        
-        
+
+
         // Finland.setCountryLanguages();
         // Finland.setCountryLanguages(Finland.CountryName, "Swedish", false);
         // Finland.getLanguages();
@@ -54,6 +77,14 @@ class Program
         EasternEurope,
         WesternEurope
     }
+    public enum EnumBorderCountry
+    {
+        None = 0b_0000_0000,
+        Norway = 0b_0000_0001,
+        Sweden = 0b_0000_0010,
+        Russia = 0b_0000_0100,
+        Finland = 0b_0000_1000
+    }
 
     class Country
     {
@@ -63,13 +94,13 @@ class Program
         public EnumRegion Region;
         public string Capital { get; init; }
         public double Gdp;
-        public Languages[] languages =new Languages[100];
-        public string[]? cities;
-        public string[] borders = { "Norway", "Sweden", "Russia" };
+        public Languages[] languages = new Languages[100];
+        public Cities[] cities = new Cities[100];
+        public EnumBorderCountry borders;
 
-        private string? _langugage;
-        private bool _isDefault;
-        private string? _cntry;
+        // private string? _langugage;
+        // private bool _isDefault;
+        // private string? _cntry;
 
         //constructor
         public Country(string country, string capital, long population, double gdp)
@@ -83,22 +114,11 @@ class Program
             Population = population;
             Gdp = gdp;
         }
-        // public void setCountryLanguages(string countryName, string language, bool isDefault)
-        // {
-        //     _cntry = countryName;
-        //     _langugage = language;
-        //     _isDefault = isDefault;
-        // }
-        // public void getLanguages(){
-        //     if(this._isDefault){
-        //         Console.WriteLine($"{this.CountryName}");
-        //     } 
-        // }
-        public static bool HasBorder(string countryName)
-        {
-            return true;
-        }
-        public static bool HasBorder(Country name) => name.borders.Length > 0 ? true : false;
+        public static bool HasBorder(Country name) => name.borders > 0 ? true : false;
+
+        public static EnumBorderCountry HasBorder(EnumBorderCountry borderCountry1, EnumBorderCountry borderCountry2) => (borderCountry1 & borderCountry2);
+
+        // public static bool HasBorder(Country name) => name.borders.Length > 0 ? true : false;
 
         public static bool CheckWealth(Country name)
         {
