@@ -40,25 +40,17 @@ class Program
 
         Console.WriteLine(Country.HasBorder(Finland.borders, Sweden.borders));
         //Debug.Assert(Country.HasBorder(Finland) == true);
-
-
-
-
-
-        // Finland.cities[0] = new Cities("Helsinki", true, 658864);
-        // Finland.cities[1] = new Cities("Tampere", false, 244315);
-        // Finland.cities[2] = new Cities("Lahti", false, 120093);
-        // for (var i = 0; i < Finland.cities.Length; i++)
-        // {
-        //     Console.WriteLine(Finland.cities[i].IsCapital ? Finland.cities[i].CityName : "");   //Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.
-        // }
-
-
-
-
+        List<Cities> cityList = new List<Cities>();
+        cityList.Add(new Cities("Helsinki", true, 658864));
+        cityList.Add(new Cities("Tampere", false, 244315));
+        cityList.Add(new Cities("Lahti", false, 120093));
+        cityList.Add(new Cities("Joensuu", false, 120093));
+        Finland.cities = cityList.ToArray<Cities>();
+        for (var i = 0; i < Finland.cities.Count(); i++)
+        {
+            Console.WriteLine(Finland.cities[i].IsCapital ? Finland.cities[i].CityName : "");   //Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.
+        }
         //Finland.languages.add();
-
-
         // Finland.setCountryLanguages();
         // Finland.setCountryLanguages(Finland.CountryName, "Swedish", false);
         // Finland.getLanguages();
@@ -97,9 +89,8 @@ class Program
         public string Capital { get; init; }
         public double Gdp;
         public Languages[]? languages;
-        public Cities[] cities;
+        public Cities[]? cities;
         public EnumBorderCountry borders;
-
         // private string? _langugage;
         // private bool _isDefault;
         // private string? _cntry;
@@ -119,7 +110,6 @@ class Program
         public static bool HasBorder(Country name) => name.borders > 0 ? true : false;
 
         public static EnumBorderCountry HasBorder(EnumBorderCountry borderCountry1, EnumBorderCountry borderCountry2) => (borderCountry1 & borderCountry2);
-        //public static EnumBorderCountry HasBorder(EnumBorderCountry borderCountry1) => (borders & borderCountry1);
 
         // public static bool HasBorder(Country name) => name.borders.Length > 0 ? true : false;
 
@@ -127,7 +117,9 @@ class Program
         {
             return true;
         }
+       
     }
+   
 
     class Room
     {
