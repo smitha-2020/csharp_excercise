@@ -20,8 +20,6 @@ class Program
          */
         var Finland = new Country("Finland", "Helsinki", 5530719, 27.3);
         Finland.Region = EnumRegion.NorthernEurope;
-        var Sweden = new Country("Sweden", "Stockholm", 5530719, 27.3);
-        Sweden.Region = EnumRegion.SouthernEurope;
         List<Languages> languagesList = new List<Languages>();
         languagesList.Add(new Languages("Finnish", true));
         languagesList.Add(new Languages("Swedish", false));
@@ -34,9 +32,13 @@ class Program
             Console.WriteLine(Finland.languages[i].IsDefault ? Finland.languages[i].Language : "");
         }
         Finland.borders = EnumBorderCountry.Norway | EnumBorderCountry.Sweden | EnumBorderCountry.Russia;
+
+
+        var Sweden = new Country("Sweden", "Stockholm", 5530719, 27.3);
+        Sweden.Region = EnumRegion.SouthernEurope;
         Sweden.borders = EnumBorderCountry.Norway | EnumBorderCountry.Finland;
 
-        //Console.WriteLine(Country.HasBorder(Finland));
+        Console.WriteLine(Country.HasBorder(Finland.borders, Sweden.borders));
         //Debug.Assert(Country.HasBorder(Finland) == true);
 
 
@@ -94,8 +96,8 @@ class Program
         public EnumRegion Region;
         public string Capital { get; init; }
         public double Gdp;
-        public Languages[] languages = new Languages[100];
-        public Cities[] cities = new Cities[100];
+        public Languages[]? languages;
+        public Cities[] cities;
         public EnumBorderCountry borders;
 
         // private string? _langugage;
@@ -117,6 +119,7 @@ class Program
         public static bool HasBorder(Country name) => name.borders > 0 ? true : false;
 
         public static EnumBorderCountry HasBorder(EnumBorderCountry borderCountry1, EnumBorderCountry borderCountry2) => (borderCountry1 & borderCountry2);
+        //public static EnumBorderCountry HasBorder(EnumBorderCountry borderCountry1) => (borders & borderCountry1);
 
         // public static bool HasBorder(Country name) => name.borders.Length > 0 ? true : false;
 
