@@ -1,10 +1,10 @@
-public class Cities
+public class City
 {
     public string CityName;
     public bool IsCapital;
     public double Population;
 
-    public Cities(string name, bool isCapital, double population)
+    public City(string name, bool isCapital, double population)
     {
         CityName = name;
         IsCapital = isCapital;
