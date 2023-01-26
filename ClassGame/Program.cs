@@ -65,7 +65,7 @@ class Program
         Country.CountriesList[1] = Sweden;
         Country.CountriesList[2] = Norway;
         Country.HasBorder(Finland);
-        Country.CheckWealth(Finland);
+        Console.WriteLine(Country.CheckWealth(Denmark));
     }
     class Room
     {

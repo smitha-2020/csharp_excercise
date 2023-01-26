@@ -58,9 +58,10 @@ public class Country
     {
         foreach (var countryBorder in CountriesList)
         {
-            if(((countryBorder?.borders) & (EnumBorderCountry.Finland)) ==  (EnumBorderCountry.Finland)){
-                 Console.WriteLine($"Countries that have borders with {name.CountryName} is {countryBorder?.CountryName}");
-            }   
+            if (((countryBorder?.borders) & (EnumBorderCountry.Finland)) == (EnumBorderCountry.Finland))
+            {
+                Console.WriteLine($"Countries that have borders with {name.CountryName} is {countryBorder?.CountryName}");
+            }
         }
     }
 
@@ -70,8 +71,25 @@ public class Country
 
     public static WealthIndex CheckWealth(Country name)
     {
-        if(name.Gdp>70){
+        if (name.Gdp > 70 && name.Gdp < 85)
+        {
+            return WealthIndex.Rich;
+        }
+        else if (name.Gdp > 85 && name.Gdp <= 100)
+        {
+            return WealthIndex.SuperRich;
+        }
+        else if (name.Gdp < 70 && name.Gdp > 55)
+        {
             return WealthIndex.Medium;
+        }
+        else if (name.Gdp > 35 && name.Gdp < 55)
+        {
+            return WealthIndex.Poor;
+        }
+        else if (name.Gdp < 35)
+        {
+            return WealthIndex.SuperPoor;
         }
         return WealthIndex.Medium;
     }
