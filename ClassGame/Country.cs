@@ -35,6 +35,8 @@ public class Country
     public City[] Cities = new City[5];
     public EnumBorderCountry borders;
 
+    public static Country[] CountriesList = new Country[5];
+
     //public static Country[] Countries = new Country[100];
     // private string? _langugage;
     // private bool _isDefault;
@@ -52,18 +54,27 @@ public class Country
         Population = population;
         Gdp = gdp;
     }
-    public static bool HasBorder(Country name) => name.borders > 0 ? true : false;
+    public static void HasBorder(Country name)
+    {
+        foreach (var countryBorder in CountriesList)
+        {
+            if(((countryBorder?.borders) & (EnumBorderCountry.Finland)) ==  (EnumBorderCountry.Finland)){
+                 Console.WriteLine($"Countries that have borders with {name.CountryName} is {countryBorder?.CountryName}");
+            }   
+        }
+    }
 
     public static EnumBorderCountry HasBorder(EnumBorderCountry borderCountry1, EnumBorderCountry borderCountry2) => (borderCountry1 & borderCountry2);
 
     // public static bool HasBorder(Country name) => name.borders.Length > 0 ? true : false;
 
-    public static bool CheckWealth(Country name)
+    public static WealthIndex CheckWealth(Country name)
     {
-        return true;
+        if(name.Gdp>70){
+            return WealthIndex.Medium;
+        }
+        return WealthIndex.Medium;
     }
-
-
     public City this[Index Index]
     {
         get
