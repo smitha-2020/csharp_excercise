@@ -27,7 +27,7 @@ public class Country
 {
     /* provide your code for challenge 1 here */
     public string CountryName  { get;}
-    public long Population { get; set; }
+    public int Population { get; set; }
     public EnumRegion Region;
     public string Capital { get; init; }
     public double Gdp { get; set; }
@@ -41,7 +41,7 @@ public class Country
     // private bool _isDefault;
     // private string? _cntry;
     //constructor
-    public Country(string country, string capital, long population, double gdp)
+    public Country(string country, string capital, int population, double gdp)
     {
         if (country == null)
         {
