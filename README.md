@@ -23,6 +23,7 @@ Check 2 challenges below. Codes should be givent in `ClassGame/Program.cs`
         - IsCapital (If the city is the capital)
     - Population
     - List of countries that border with this country
+    
 
 2. Defining these methods:
 
@@ -33,6 +34,8 @@ NOTES:
 You may need to define extra classes/structs to represent different entity/object types (think about real life)
 Use method overloading if needed
 When defining properties, think about what should be: readonly, init-only or with private setter.
+
+![alt text]()
 
 ### Maze challenge
 

@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Text;
 
 class Program
 {
     private static void Main(string[] args)
     {
+        StringBuilder builder = new StringBuilder();
         //Challenge 1
         /* create variables from these countries
         Finland: 
@@ -25,20 +27,19 @@ class Program
         languagesList.Add(new Languages("Swedish", false));
         languagesList.Add(new Languages("English", false));
         Finland.languages = languagesList.ToArray<Languages>();
-        // converts List to Array:
-        //Languages[] Finland.Languages = languagesList.ToArray<Languages>();
         for (var i = 0; i < Finland.languages.Count(); i++)
         {
             if (Finland.languages[i].IsDefault)
             {
-                Console.WriteLine(Finland.languages[i].Language);
+                Console.WriteLine($"Default Language Spoken in Finland is {Finland.languages[i].Language}");
             }
         }
+        Console.WriteLine("*******************************************************************************");
         Finland.borders = EnumBorderCountry.Norway | EnumBorderCountry.Sweden | EnumBorderCountry.Russia;
 
-        var Denmark = new Country("Denmark", "Luxemburg", 5030719, 92.3f);
-        Denmark.Region = EnumRegion.SouthernEurope;
-        Denmark.borders = EnumBorderCountry.Sweden | EnumBorderCountry.Norway;
+        var Luxemburg = new Country("Luxemburg", "Luxemburg", 5030719, 92.3f);
+        Luxemburg.Region = EnumRegion.SouthernEurope;
+        Luxemburg.borders = EnumBorderCountry.Sweden | EnumBorderCountry.Norway;
 
         var Sweden = new Country("Sweden", "Stockholm", 5530719, 42.3f);
         Sweden.Region = EnumRegion.SouthernEurope;
@@ -48,7 +49,9 @@ class Program
         Norway.Region = EnumRegion.SouthernEurope;
         Norway.borders = EnumBorderCountry.Sweden | EnumBorderCountry.Denmark;
 
-        Console.WriteLine(Country.HasBorder(Finland.borders, Sweden.borders));
+        Console.WriteLine($"Finland and Sweden share thier borders with {Country.HasBorder(Finland.borders, Sweden.borders)}");
+        Console.WriteLine("*******************************************************************************");
+
 
         Finland.Cities[0] = new City("Helsinki", true, 658864);
         Finland.Cities[1] = new City("Tampere", false, 244315);
@@ -56,16 +59,24 @@ class Program
         Finland.Cities[3] = new City("Joensuu", false, 120093);
 
         var FinCities = Finland.Cities[0..3];
-
+        builder.Append("Finland has");
         foreach (var city in FinCities)
         {
-            Console.WriteLine(city.CityName);
+            builder.Append($" {city.CityName},");
+            //Console.WriteLine(city.CityName);
         }
+        builder.Append(" Cities");
+        Console.WriteLine(builder.ToString());
+        Console.WriteLine("*******************************************************************************");
         Country.CountriesList[0] = Finland;
         Country.CountriesList[1] = Sweden;
         Country.CountriesList[2] = Norway;
-        Country.HasBorder(Finland);
-        Console.WriteLine(Country.CheckWealth(Denmark));
+        EnumBorderCountry FI = EnumBorderCountry.Finland;
+        Country.HasBorder(FI);
+        Console.WriteLine("*******************************************************************************");
+        Console.WriteLine($"Luxemburg is voted as {Country.CheckWealth(Luxemburg)}");
+
+        //Console.WriteLine((int)EnumBorderCountry.Finland);
     }
     class Room
     {

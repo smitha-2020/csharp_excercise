@@ -1,7 +1,7 @@
 public class Languages
 {
-    public string Language;
-    public bool IsDefault;
+    public string Language  { get; set; }
+    public bool IsDefault  { get; set; }
 
     public Languages(string language, bool isDefault)
     {
