@@ -35,6 +35,8 @@ You may need to define extra classes/structs to represent different entity/objec
 Use method overloading if needed
 When defining properties, think about what should be: readonly, init-only or with private setter.
 
+
+
 ![alt text](https://github.com/smitha-2020/fs13-CSharp_class_exercises/blob/main/ClassGame/country.png)
 
 ### Maze challenge
